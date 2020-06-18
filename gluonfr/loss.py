@@ -23,6 +23,7 @@
 import math
 import numpy as np
 from mxnet import nd, init
+from mxnet.gluon.nn import HybridBlock
 from mxnet.gluon.loss import Loss, SoftmaxCrossEntropyLoss
 
 __all__ = ["get_loss", "get_loss_list", "ArcLoss", "TripletLoss", "RingLoss",
@@ -811,6 +812,10 @@ class SVXSoftmax(SoftmaxCrossEntropyLoss):
         fc = fc + diff
         fc = fc * self._scale
         return super().hybrid_forward(F, pred=fc, label=label, sample_weight=sample_weight)
+
+
+class CircleLoss(HybridBlock):
+    pass
 
 
 _losses = {
